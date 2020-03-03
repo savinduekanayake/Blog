@@ -12,11 +12,20 @@
     <hr>
     <h2>Create New Blog Post:</h2>
     <form action="/posts" method='POST'>
-        Title:<input type="text" name="title" id="title">
+        <label for="content">Title:</label>
+        <!-- <input type="text" name="title" id="title"> -->
+        <input class="form-control" type="text" name="title" id="title" placeholder="Enter Title" aria-label="Enter Title">
+
         <br>
-        Author: <input type="text" name="author" id="author">
+        <label for="content">Author:</label>
+        <input class="form-control" type="text" name="author" id="author" placeholder="Enter author" aria-label="Enter author">
+        <!-- <input type="text" name="author" id="author"> -->
         <br>
-        Post: <input type="text" name="content" id="content">
+
+        <label for="content">Post:</label>
+        <!-- <input class="form-control" type="text" name="content" id="content" placeholder="Enter content" aria-label="Enter content"> -->
+        <!-- <input type="text" name="content" id="content"> -->
+        <textarea class="form-control" name="content" id="content" placeholder="Enter content" aria-label="Enter content" rows="3"></textarea>
         <br>
         <input type="submit" value="Post">
     </form>
@@ -24,17 +33,21 @@
 
 
     {% for post in posts %}
+        <br>
         <h2>{{ post.title }}</h2>
 
         {% if post.author %}
-            <h3> By: {{ post.author }}</h3>
+            <small> Written by: {{ post.author }} on {{ post.date_posted }} </small>
         {% else %}
-            <h3>By: N/A</h3>
+            <small> Written by Unknown on {{ post.date_posted }} </small>
         {% endif %}
+        <br>
+        <br>
 
         <p>{{ post.content }}</p>
-        <a href="/posts/delete/{{post.id}}" >Delete</a>
-        <a href="/posts/edit/{{post.id}}" >Edit</a>
+        <a class="btn btn-danger" href="/posts/delete/{{post.id}}" >Delete</a>
+        <a class="btn btn-primary" href="/posts/edit/{{post.id}}" >Edit</a>
+        <br>
         <hr>
 
     {% endfor %}
